@@ -103,12 +103,17 @@
     const a = document.createElement('a');
     a.className = 'item';
     a.href = app.url;
-    // "_blank" is the specific value iOS recognizes as "hand off to full
-    // Safari" from a standalone home-screen web app — anything else causes
-    // the tap to navigate this app's own window instead, so it must stay this
     a.target = '_blank';
     a.rel = 'noopener';
     a.innerHTML = `<span class="dot"></span><span class="name">${app.name}</span><span class="chev">›</span>`;
+    // belt-and-suspenders: force a real new-window request via JS and
+    // preventDefault the normal navigation, so this document (this standalone
+    // app's own window) can never itself navigate away from index.html —
+    // relying on target="_blank" alone was not reliable enough on iOS
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open(app.url, '_blank', 'noopener');
+    });
     list.appendChild(a);
   }
 </script>
