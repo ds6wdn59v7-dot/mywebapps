@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="My Web Apps">
+<meta name="theme-color" content="#1e1e20">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<title>My Web Apps</title>
+<style>
+  :root {
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #1e1e20;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
+    color: #f0f0f0;
+    padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+  h1 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin: 8px 4px 14px;
+  }
+  .list {
+    background: rgba(255,255,255,0.06);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  a.item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 16px;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  a.item:last-child { border-bottom: none; }
+  a.item:active { background: rgba(255,255,255,0.08); }
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #4ade80;
+    flex-shrink: 0;
+  }
+  .name {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .chev {
+    color: rgba(255,255,255,0.25);
+    font-size: 14px;
+  }
+  footer {
+    margin-top: auto;
+    padding-top: 24px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+  }
+</style>
+</head>
+<body>
+  <h1>My Web Apps</h1>
+  <div class="list" id="list"></div>
+  <footer>ホーム画面に追加して使う自分専用の早見表</footer>
+
+<script>
+  const apps = [
+    { name: 'koyomi', url: 'https://nakamochiya.com' },
+    { name: 'oshigoto', url: 'https://oshigoto-app-2026.web.app' },
+    { name: 'shikomi', url: 'https://ds6wdn59v7-dot.github.io/shikomi/' },
+    { name: 'stock-pilot', url: 'https://smaregi-stock-pilot.pages.dev/' },
+    { name: 'sales-pilot', url: 'https://smaregi-sales-pilot.pages.dev/' },
+    { name: 'customer-pilot', url: 'https://smaregi-customer-pilot.pages.dev/' },
+    { name: '天児屋根AI', url: 'https://amanokoyane-ai.pages.dev' },
+    { name: 'みちひらき', url: 'https://vote-mane-michihiraki.web.app/admin' },
+    { name: '沖宮大文化祭', url: 'https://okinogu-daibunkasai.web.app' },
+  ];
+
+  const list = document.getElementById('list');
+  for (const app of apps) {
+    const a = document.createElement('a');
+    a.className = 'item';
+    a.href = app.url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.innerHTML = `<span class="dot"></span><span class="name">${app.name}</span><span class="chev">›</span>`;
+    list.appendChild(a);
+  }
+</script>
+</body>
+</html>
