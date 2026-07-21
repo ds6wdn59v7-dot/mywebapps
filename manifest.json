@@ -2,7 +2,7 @@
   "name": "My Web Apps",
   "short_name": "My Web Apps",
   "start_url": "./",
-  "display": "standalone",
+  "display": "browser",
   "background_color": "#1e1e20",
   "theme_color": "#1e1e20",
   "icons": [

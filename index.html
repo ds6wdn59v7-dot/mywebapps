@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- deliberately NOT apple-mobile-web-app-capable: "standalone" mode traps
+     all navigation inside one chrome-less window with no way to open a
+     separate Safari tab. Keeping this a plain bookmark means the icon always
+     reopens fresh to this list, and app links open as normal Safari tabs. -->
 <meta name="apple-mobile-web-app-title" content="My Web Apps">
 <meta name="theme-color" content="#1e1e20">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -106,14 +108,6 @@
     a.target = '_blank';
     a.rel = 'noopener';
     a.innerHTML = `<span class="dot"></span><span class="name">${app.name}</span><span class="chev">›</span>`;
-    // belt-and-suspenders: force a real new-window request via JS and
-    // preventDefault the normal navigation, so this document (this standalone
-    // app's own window) can never itself navigate away from index.html —
-    // relying on target="_blank" alone was not reliable enough on iOS
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.open(app.url, '_blank', 'noopener');
-    });
     list.appendChild(a);
   }
 </script>
