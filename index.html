@@ -103,7 +103,9 @@
     const a = document.createElement('a');
     a.className = 'item';
     a.href = app.url;
-    a.target = '_blank';
+    // same fixed target name for every link (not "_blank") — reuses one
+    // Safari tab/window each tap instead of piling up a new one every time
+    a.target = 'mywebapps-viewer';
     a.rel = 'noopener';
     a.innerHTML = `<span class="dot"></span><span class="name">${app.name}</span><span class="chev">›</span>`;
     list.appendChild(a);
